@@ -1,0 +1,73 @@
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        MEAN Movies > Movies List
+    </div>
+</md-toolbar>
+<div layout-padding flex class="form" layout="row">
+    <md-sidenav class="md-sidenav-left full" md-is-locked-open="true" md-whiteframe="4">
+        <md-content layout="column">
+            <md-input-container>
+                <label>Search Movie</label>
+                <input type="text" ng-model="$ctrl.searchText">
+            </md-input-container>
+            <md-input-container class="md-block">
+                    <label>Select</label>
+                    <md-select ng-model="$ctrl.selectedRatingFilter">
+                        <md-option ng-value="type.text" ng-repeat="type in $ctrl.ratingFilters">
+                            {{type.text}}
+                        </md-option>
+                    </md-select>
+            </md-input-container>
+            <md-input-container class="md-block">
+                    <label >Select Genre</label>
+                    <md-select ng-model="$ctrl.selectedGenre">
+                        <md-option ng-value="genre.text" ng-repeat="genre in $ctrl.genreTypes">
+                            {{genre.text}}
+                        </md-option>
+                    </md-select>
+            </md-input-container>
+            <md-button class="md-raised md-primary" ng-click="$ctrl.getAllMoviesFiltered()"> Search</md-button>
+        </md-content>
+    </md-sidenav>
+
+    <md-content layout="column" class="card-container" flex layout-padding>
+        <section>
+            <div flex ng-repeat="movie in $ctrl.movies">
+                <md-card md-theme="default" md-theme-watch="">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{ movie.title }}</span>
+                            <span class="md-subhead">{{ movie.genre }}</span>
+                            <h4>Box Office Earnings</h4>
+                            <p>{{ movie.boxOfficeEarning | currency }}</p>
+                            <h4>Release Date (weeks since release)</h4>
+                            <p>{{ movie.releaseDate | amUtc | amDateFormat:'MM/DD/YYYY' }} ({{$ctrl.today | amDifference : movie.releaseDate : 'weeks' }})</p>
+                            <h4>Rating</h4>
+                            <p ng-if="movie.rating >= 7"><i class="material-icons">sentiment_very_satisfied</i>&nbsp; ({{movie.rating}}/10)</p>
+                            <p ng-if="movie.rating < 7 && movie.rating > 4"><i class="material-icons">sentiment_neutral</i>&nbsp; ({{movie.rating}}/10)</p>
+                            <p ng-if="movie.rating <= 4"><i class="material-icons">sentiment_very_dissatisfied</i>&nbsp; ({{movie.rating}}/10)</p>
+                            
+                        </md-card-title-text>
+                        <md-card-title-media ng-if="movie.showDetails">
+                            <img class="md-media-xl card-media poster" ng-src="{{movie.poster}}"/>
+                        </md-card-title-media>
+                    </md-card-title>
+                    <md-card-content layout-align="space-between" ng-if="movie.showDetails">
+                        <h4>Directed By</h4>
+                        <p>{{ movie.director }}</p>
+                        <h4>Starring</h4>
+                        <p>{{movie.mainActors[0]}}, {{movie.mainActors[1]}}, & {{movie.mainActors[2]}}<p>
+                        <h4>Length</h4>
+                        <p>{{ movie.length | amDurationFormat : 'minute' }}</p>
+                        <h4>Synopsis</h4>
+                        <p>{{ movie.shortSynopsis }}</p>
+                        <md-button class="md-primary" ng-click="$ctrl.viewReviews(movie.id)">Read Reviews</md-button>
+                    </md-card-content>
+                    <md-card-actions layout="row" layout-align="end center">
+                        <md-button ng-click="movie.showDetails = !movie.showDetails">Toggle Movie Details</md-button>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </section>   
+    </md-content>  
+</div>

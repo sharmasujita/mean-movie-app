@@ -1,0 +1,73 @@
+.material-icons.more {
+    margin: -2% 49%;
+    text-align: center;
+    font-size: 2em;
+}
+
+.card {
+    width: 90%; 
+    background: #fff; 
+}
+
+.card-actions {
+    text-align: center
+}
+
+.card-container {
+    height: 100%;
+}
+
+.card-details {
+    width: inherit;
+    text-align: center;
+}
+
+.center {
+    margin: 10px auto;
+}
+
+.search-form {
+    margin: 10 auto;
+}
+
+.review-form-container {
+    background: #fff;
+}
+
+.review-form {
+    margin: 20px auto;
+    width: 40%;
+}
+
+.reviews-container {
+    z-index: 10;
+}
+
+.reviews {
+    max-height: 60%;
+}
+
+.review-item {
+    padding: 15px;
+}
+
+.poster {
+    width: 150px;
+}
+
+.full {
+    height: 100%;
+}
+
+.link {
+    text-decoration: none;
+    color: #000;
+}
+
+md-card-content h4, md-card-title-text h4 {
+    margin: 10px 0px 0px;
+}
+
+md-card-content p, md-card-title-text p {
+    margin: 0;
+}
